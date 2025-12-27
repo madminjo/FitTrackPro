@@ -1,24 +1,39 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { AuthProvider, useAuth } from '@/lib/auth-context'
+import { Stack, useRouter, useSegments } from 'expo-router'
+import { useEffect } from 'react'
+import { PaperProvider } from 'react-native-paper'
+import { SafeAreaProvider } from 'react-native-safe-area-context'
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
+function RouteGrups({ children }: { children: React.ReactNode }) {
+	const router = useRouter()
+	const { user, isLoadingUser } = useAuth()
+	const segments = useSegments()
 
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+	useEffect(() => {
+		const inAuthGrup = segments[0] === 'auth'
+
+		if (!user && !inAuthGrup && !isLoadingUser) {
+			router.replace('/auth')
+		} else if (user && inAuthGrup && !isLoadingUser) {
+			router.replace('/')
+		}
+	}, [user, segments, isLoadingUser, router])
+
+	return <>{children}</>
+}
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
-  );
+	return (
+		<AuthProvider>
+			<PaperProvider>
+				<SafeAreaProvider>
+					<RouteGrups>
+						<Stack>
+							<Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+						</Stack>
+					</RouteGrups>
+				</SafeAreaProvider>
+			</PaperProvider>
+		</AuthProvider>
+	)
 }
