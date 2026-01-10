@@ -18,7 +18,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 	const [isLoadingUser, setIsLoadingUser] = useState<boolean>(true)
 
 	useEffect(() => {
-		getUser()
+		const init = async () => {
+			await getUser()
+		}
+		init()
 	}, [])
 
 	const getUser = async () => {
@@ -48,8 +51,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 	const signIn = async (email: string, password: string) => {
 		try {
 			await account.createEmailPasswordSession(email, password)
-			const session = await account.get()	
-			setUser(session);
+			const session = await account.get()
+			setUser(session)
 			return null
 		} catch (error) {
 			if (error instanceof Error) {
@@ -63,14 +66,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 	const signOut = async () => {
 		try {
 			await account.deleteSession('current')
-		setUser(null)
+			setUser(null)
 		} catch (error) {
-			console.log( error)
+			console.log(error)
 		}
 	}
 
 	return (
-		<AuthContext.Provider value={{ user, isLoadingUser, signUp, signIn ,signOut}}>
+		<AuthContext.Provider
+			value={{ user, isLoadingUser, signUp, signIn, signOut }}
+		>
 			{children}
 		</AuthContext.Provider>
 	)

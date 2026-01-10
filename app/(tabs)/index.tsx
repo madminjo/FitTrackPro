@@ -14,7 +14,7 @@ import { Link } from 'expo-router'
 export default function Index() {
 	const { signOut } = useAuth()
 	return (
-		<SafeAreaView style={styles.container} edges={['top','left','right']}>
+		<SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
 			<View style={tw`flex flex-row justify-between items-center w-full mb-4`}>
 				<Text style={styles.text}>Home</Text>
 				<Button
@@ -290,7 +290,7 @@ export default function Index() {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingTop: 8, 
+		paddingTop: 8,
 		paddingHorizontal: 8,
 		backgroundColor: '#f5f5f5',
 	},
