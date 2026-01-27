@@ -8,10 +8,9 @@
     "userInterfaceStyle": "automatic",
     "scheme": "reactnativecourse",
 
-    "newArchEnabled": false,
-
     "android": {
       "package": "com.scrayass.reactnativecourse",
+      "newArchEnabled": true,
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/android-icon-foreground.png",
         "backgroundColor": "#E6F4FE"
@@ -30,14 +29,16 @@
       ]
     ],
 
-    "experiments": {},
-
     "extra": {
       "eas": {
         "projectId": "1efb601d-e3ce-4f43-856f-1968461917cb"
       }
     },
 
-    "owner": "scrayass"
+    "owner": "scrayass",
+
+    "ios": {
+      "bundleIdentifier": "com.scrayass.reactnativecourse"
+    }
   }
 }
