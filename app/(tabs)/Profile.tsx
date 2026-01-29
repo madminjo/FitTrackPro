@@ -5,27 +5,9 @@ import { useAuth } from '@/lib/auth-context'
 import tw from 'twrnc'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
-import EvilIcons from '@expo/vector-icons/EvilIcons'
-import { useEffect, useState } from 'react'
 
 export default function Profile() {
-  const { user, signOut, isLoadingUser, refreshUser, getCurrentUser } = useAuth()
-  const [refreshing, setRefreshing] = useState(false)
-
-  // Для отладки
-  useEffect(() => {
-    if (user) {
-      console.log('📱 Profile - User data:', user)
-    } else {
-      console.log('📱 Profile - No user data')
-    }
-  }, [user])
-
-  const handleRefresh = async () => {
-    setRefreshing(true)
-    await refreshUser()
-    setRefreshing(false)
-  }
+  const { user, signOut, isLoadingUser, getCurrentUser } = useAuth()
 
   const handleDebug = async () => {
     try {
@@ -35,7 +17,7 @@ export default function Profile() {
         `User: ${currentUser ? JSON.stringify(currentUser, null, 2) : 'null'}\n\nEmail: ${currentUser?.email || 'none'}`
       )
     } catch (error) {
-      Alert.alert('Error', 'Failed to get debug info')
+      Alert.alert('error', 'Failed to get debug info')
     }
   }
 
@@ -110,22 +92,12 @@ export default function Profile() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
-      <View style={tw`flex-row justify-between items-center mb-4`}>
-        <Text style={styles.title}>Profile</Text>
-        
+      <View style={tw`flex flex-row justify-between items-center w-full mb-6`}>
+        <View>
+          <Text style={tw`text-gray-500 text-sm`}>Welcome back,</Text>
+          <Text style={styles.title}>Profile</Text>
+        </View>
         <View style={tw`flex-row items-center gap-2`}>
-          <Button
-            mode="text"
-            onPress={handleRefresh}
-            loading={refreshing}
-            icon={() => (
-              <FontAwesome5 name="sync" size={14} color="#6200ee" />
-            )}
-            style={tw`mr-2`}
-          >
-            <Text style={tw`text-[#6200ee] text-xs`}>Refresh</Text>
-          </Button>
-          
           <Button
             mode="text"
             onPress={signOut}
@@ -137,18 +109,18 @@ export default function Profile() {
           </Button>
         </View>
       </View>
-      
-      <ScrollView 
-        showsVerticalScrollIndicator={false} 
+
+      <ScrollView
+        showsVerticalScrollIndicator={false}
         style={tw`w-full`}
         contentContainerStyle={tw`pb-6`}
       >
-        {/* Аватар и основная информация */}
+
         <View style={tw`items-center mb-6`}>
           <View style={tw`relative`}>
             <Image
               source={
-                user.avatar 
+                user.avatar
                   ? { uri: user.avatar }
                   : require('@/assets/imga/users.jpeg')
               }
@@ -158,19 +130,19 @@ export default function Profile() {
               <FontAwesome5 name="camera" size={12} color="white" />
             </View>
           </View>
-          
+
           <Text style={tw`text-xl font-bold text-zinc-900 mt-3`}>
             {user?.first_name || user?.email?.split('@')[0] || 'User'}
           </Text>
-          
+
           <Text style={tw`text-sm text-zinc-500 mt-1`}>{user?.email}</Text>
-          
+
           {(user?.first_name || user?.last_name) && (
             <Text style={tw`text-sm text-zinc-400 mt-1`}>
               {user.first_name || ''} {user.last_name || ''}
             </Text>
           )}
-          
+
           <Button
             mode="outlined"
             onPress={handleDebug}
@@ -180,27 +152,25 @@ export default function Profile() {
             <Text style={tw`text-xs`}>Debug Info</Text>
           </Button>
         </View>
-
-        {/* Статистика */}
         <View style={tw`flex-row justify-between mb-6`}>
-          <StatCard 
-            value={user.age ? String(user.age) : '18'} 
-            label="Age" 
+          <StatCard
+            value={user.age ? String(user.age) : '18'}
+            label="Age"
             icon="calendar"
           />
-          <StatCard 
-            value={user.weight_value ? `${user.weight_value} kg` : '74'} 
-            label="Weight" 
+          <StatCard
+            value={user.weight_value ? `${user.weight_value} kg` : '74'}
+            label="Weight"
             icon="scale-bathroom"
           />
-          <StatCard 
-            value={user.growth ? `${user.growth} cm` : '170'} 
-            label="Height" 
+          <StatCard
+            value={user.growth ? `${user.growth} cm` : '170'}
+            label="Height"
             icon="human-male-height"
           />
         </View>
 
-        {/* Персональные данные */}
+
         <View style={tw`bg-white rounded-2xl p-4 border border-gray-200 mb-6`}>
           <View style={tw`flex-row justify-between items-center mb-4`}>
             <Text style={tw`text-xl font-semibold text-zinc-900 text-[#6200ee]`}>
@@ -213,14 +183,14 @@ export default function Profile() {
           <Divider />
           <InfoRow icon="phone" label="Phone" value={formatValue(user?.phone_number)} />
           <Divider />
-          <InfoRow 
-            icon="account" 
-            label="Name" 
+          <InfoRow
+            icon="account"
+            label="Name"
             value={
-              user?.first_name || user?.last_name 
+              user?.first_name || user?.last_name
                 ? `${user.first_name || ''} ${user.last_name || ''}`.trim()
                 : 'Not set'
-            } 
+            }
           />
           <Divider />
           <InfoRow icon="gender-male-female" label="Gender" value={formatGender(user?.gender)} />
@@ -230,28 +200,27 @@ export default function Profile() {
           <InfoRow icon="run" label="Activity Level" value={formatActivity(user?.physical_activity)} />
         </View>
 
-        {/* Достижения */}
         <View style={tw`rounded-2xl mb-6 flex gap-2`}>
           <View style={tw`flex-row justify-between items-center mb-2`}>
             <Text style={tw`text-[#6200ee] text-xl font-semibold`}>
               Achievements
             </Text>
-            <MaterialCommunityIcons name="trophy" size={24} color="#f59e0b" />
+            <MaterialCommunityIcons name="trophy" size={24} color="#6200ee" />
           </View>
-          
+
           {[
-            { 
-              title: 'Account Created', 
+            {
+              title: 'Account Created',
               description: 'Welcome to our community!',
               icon: 'account-check'
             },
-            { 
-              title: 'Profile Complete', 
+            {
+              title: 'Profile Complete',
               description: 'All personal info added',
               icon: 'clipboard-check'
             },
-            { 
-              title: 'Active User', 
+            {
+              title: 'Active User',
               description: 'Using the app regularly',
               icon: 'chart-line'
             },
@@ -260,11 +229,11 @@ export default function Profile() {
               key={index}
               style={tw`w-full bg-white border border-gray-200 rounded-2xl p-4 flex-row items-center gap-3`}
             >
-              <View style={tw`bg-yellow-100 p-3 rounded-xl`}>
-                <MaterialCommunityIcons 
-                  name={achievement.icon} 
-                  size={24} 
-                  color="#f59e0b" 
+              <View style={tw`bg-[#6200ee] p-3 rounded-xl`}>
+                <MaterialCommunityIcons
+                  name={achievement.icon}
+                  size={24}
+                  color="#ffffffff"
                 />
               </View>
 
@@ -335,8 +304,8 @@ const styles = StyleSheet.create({
     borderColor: '#6200ee',
   },
   title: {
-    color: '#6200ee',
-    fontSize: 22,
-    fontWeight: 'bold',
+		color: '#6200ee',
+		fontSize: 24,
+		fontWeight: 'bold',
   },
 })

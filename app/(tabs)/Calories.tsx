@@ -3,7 +3,6 @@ import {
 	StyleSheet,
 	Text,
 	View,
-	TextInput,
 	TouchableOpacity,
 	Image,
 	Alert,
@@ -20,7 +19,6 @@ import * as ImagePicker from 'expo-image-picker'
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5'
 import Ionicons from '@expo/vector-icons/Ionicons'
 
-// Тип для истории поиска
 type HistoryItem = {
 	id: number
 	name: string
@@ -31,7 +29,6 @@ type HistoryItem = {
 	date: string
 }
 
-// Тип для результата AI анализа
 type AIAnalysis = {
 	food_name: string
 	calories: number
@@ -50,8 +47,6 @@ export default function Calories() {
 	const [history, setHistory] = useState<HistoryItem[]>([
 		{ id: 1, name: 'Apple', calories: 95, protein: 0.5, carbs: 25, fat: 0.3, date: 'Today' },
 		{ id: 2, name: 'Chicken Breast', calories: 165, protein: 31, carbs: 0, fat: 3.6, date: 'Yesterday' },
-		{ id: 3, name: 'Pizza Slice', calories: 285, protein: 12, carbs: 36, fat: 10, date: '2 days ago' },
-		{ id: 4, name: 'Greek Yogurt', calories: 100, protein: 10, carbs: 6, fat: 0.4, date: '3 days ago' },
 	])
 
 	const pickImage = async () => {
@@ -72,7 +67,6 @@ export default function Calories() {
 			if (!result.canceled) {
 				setImage(result.assets[0].uri)
 				setAnalysis(null)
-				// Здесь будет отправка фото на AI анализ
 			}
 		} catch (error) {
 			Alert.alert('Error', 'Failed to pick image')
@@ -88,10 +82,8 @@ export default function Calories() {
 
 		setLoading(true)
 		try {
-			// Симуляция AI анализа (замените на реальный API вызов)
 			await new Promise(resolve => setTimeout(resolve, 2000))
 			
-			// Тестовые данные AI анализа
 			const mockAnalysis: AIAnalysis = {
 				food_name: query || 'Mixed Salad',
 				calories: Math.floor(Math.random() * 400) + 100,
@@ -104,7 +96,6 @@ export default function Calories() {
 			
 			setAnalysis(mockAnalysis)
 			
-			// Добавляем в историю
 			const newItem: HistoryItem = {
 				id: Date.now(),
 				name: mockAnalysis.food_name,
@@ -115,9 +106,8 @@ export default function Calories() {
 				date: 'Just now'
 			}
 			
-			setHistory([newItem, ...history.slice(0, 9)]) // Keep last 10 items
+			setHistory([newItem, ...history.slice(0, 9)])
 			
-			// Очищаем поле ввода
 			if (query) setQuery('')
 			
 		} catch (error) {
@@ -147,9 +137,8 @@ export default function Calories() {
 			</View>
 
 			<ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={tw`pb-8`}>
-				{/* Приветственная карточка */}
 				<LinearGradient
-					colors={['#7C3AED', '#8B5CF6']}
+					colors={['#6200ee', '#502b84ff']}
 					start={{ x: 0, y: 0 }}
 					end={{ x: 1, y: 1 }}
 					style={[tw`rounded-3xl p-6 mb-6`, styles.cardShadow]}
@@ -169,7 +158,6 @@ export default function Calories() {
 					</View>
 				</LinearGradient>
 
-				{/* Загрузка фото */}
 				<View style={[tw`rounded-2xl p-5 mb-6`, styles.cardShadow, { backgroundColor: 'white' }]}>
 					<Text style={tw`text-lg font-bold text-gray-800 mb-4`}>Upload Food Photo</Text>
 					
@@ -188,7 +176,7 @@ export default function Calories() {
 						) : (
 							<View style={tw`items-center`}>
 								<View style={tw`bg-purple-100 p-4 rounded-2xl mb-4`}>
-									<MaterialIcons name="photo-camera" size={36} color="#7C3AED" />
+									<MaterialIcons name="photo-camera" size={36} color="#6200ee" />
 								</View>
 								<Text style={tw`text-gray-600 text-center`}>
 									Tap to upload a photo of your food
@@ -199,20 +187,12 @@ export default function Calories() {
 							</View>
 						)}
 					</TouchableOpacity>
-
-					{/* Или ввод названия */}
-					<Text style={tw`text-center text-gray-500 mb-4`}>OR</Text>
-
 					<View style={tw`flex-row items-center gap-3`}>
 						<View style={tw`flex-1 bg-gray-50 rounded-xl p-3 flex-row items-center`}>
-							<Feather name="search" size={20} color="#7C3AED" />
-							<TextInput
-								style={tw`flex-1 ml-3 text-gray-800`}
-								placeholder="Enter food name (e.g., 'apple', 'pizza')"
-								value={query}
-								onChangeText={setQuery}
-								onSubmitEditing={analyzeFood}
-							/>
+							<Feather name="search" size={20} color="#6200ee" />
+							<Text style={tw`ml-2 text-gray-800`}>
+									Put a photo and press enter
+							</Text>
 						</View>
 						<TouchableOpacity
 							onPress={analyzeFood}
@@ -308,11 +288,10 @@ export default function Calories() {
 					</View>
 				)}
 
-				{/* История */}
 				<View style={[tw`rounded-2xl p-5`, styles.cardShadow, { backgroundColor: 'white' }]}>
 					<View style={tw`flex-row justify-between items-center mb-4`}>
 						<Text style={tw`text-xl font-bold text-gray-800`}>Recent History</Text>
-						<Feather name="clock" size={20} color="#7C3AED" />
+						<Feather name="clock" size={20} color="#6200ee" />
 					</View>
 
 					{history.map((item) => (
@@ -321,7 +300,7 @@ export default function Calories() {
 							style={tw`flex-row justify-between items-center py-4 border-b border-gray-100 last:border-b-0`}
 						>
 							<View>
-								<Text style={tw`font-bold text-gray-800`}>{item.name}</Text>
+								<Text style={tw`font-bold text-[#6200ee]`}>{item.name}</Text>
 								<View style={tw`flex-row items-center mt-1`}>
 									<Text style={tw`text-gray-500 text-xs`}>{item.date} • </Text>
 									<View style={tw`flex-row items-center`}>
@@ -334,14 +313,7 @@ export default function Calories() {
 							</View>
 
 							<View style={tw`flex-row items-center gap-3`}>
-								<View style={tw`items-end`}>
-									<View style={tw`flex-row items-center gap-2`}>
-										<Text style={tw`text-gray-600 text-xs`}>P: {item.protein}g</Text>
-										<Text style={tw`text-gray-600 text-xs`}>C: {item.carbs}g</Text>
-										<Text style={tw`text-gray-600 text-xs`}>F: {item.fat}g</Text>
-									</View>
-								</View>
-								<Feather name="chevron-right" size={20} color="#9CA3AF" />
+								<Feather name="chevron-right" size={20} color="#6200ee" />
 							</View>
 						</TouchableOpacity>
 					))}
@@ -359,7 +331,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#f8fafc',
 	},
 	header: {
-		color: '#1f2937',
+		color: '#6200ee',
 		fontSize: 24,
 		fontWeight: 'bold',
 	},

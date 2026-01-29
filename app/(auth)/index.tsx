@@ -1,22 +1,17 @@
 import { useAuth } from '@/lib/auth-context'
-import { api } from '@/lib/api' // Добавьте этот импорт
-import { useState, useEffect } from 'react'
-import { 
-  KeyboardAvoidingView, 
-  Platform, 
-  StyleSheet, 
-  View, 
+import { useState } from 'react'
+import {
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  View,
   ScrollView,
-  Alert
 } from 'react-native'
-import { 
-  Button, 
-  Text, 
-  TextInput, 
+import {
+  Button,
+  Text,
+  TextInput,
   useTheme,
-  ActivityIndicator,
-  Card,
-  IconButton
 } from 'react-native-paper'
 import { MaterialIcons } from '@expo/vector-icons'
 
@@ -32,27 +27,13 @@ export default function AuthScreen() {
   const [isLoading, setIsLoading] = useState(false)
 
   const theme = useTheme()
-  const { 
-    signIn, 
-    signUp, 
-    isCheckingConnection, 
-    serverStatus,
-    checkConnection 
+  const {
+    signIn,
+    signUp,
+
   } = useAuth()
 
-  // Показать статус соединения при загрузке
-  useEffect(() => {
-    if (serverStatus && !serverStatus.success) {
-      Alert.alert(
-        'Connection Issue',
-        `Cannot connect to server: ${serverStatus.message}\n\nURL: ${serverStatus.url}\n\nPlease check:\n1. Django server is running\n2. Correct IP address\n3. No firewall blocking port 8000`,
-        [
-          { text: 'Retry', onPress: () => checkConnection() },
-          { text: 'Continue Anyway', style: 'cancel' }
-        ]
-      )
-    }
-  }, [serverStatus])
+
 
   const handleAuth = async () => {
     setError(null)
@@ -127,23 +108,7 @@ export default function AuthScreen() {
 
   const toggleAuthMode = () => {
     clearForm()
-    setIsSignUp(p => !p)
-  }
-
-  // Если проверяем соединение, показываем индикатор
-  if (isCheckingConnection) {
-    return (
-      <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" />
-        <Text style={{ marginTop: 16 }}>Checking server connection...</Text>
-        {serverStatus?.url && (
-          <Text style={{ marginTop: 8, fontSize: 12, color: 'gray' }}>
-            URL: {serverStatus.url}
-          </Text>
-        )}
-      </View>
-    )
-  }
+    setIsSignUp(p => !p)  }
 
   return (
     <KeyboardAvoidingView
@@ -152,38 +117,7 @@ export default function AuthScreen() {
     >
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.content}>
-          {/* Статус сервера */}
-          {serverStatus && (
-            <Card style={[styles.statusCard, { 
-              backgroundColor: serverStatus.success ? '#E8F5E9' : '#FFEBEE' 
-            }]}>
-              <Card.Content style={styles.statusContent}>
-                <MaterialIcons 
-                  name={serverStatus.success ? "wifi" : "wifi-off"} 
-                  size={24} 
-                  color={serverStatus.success ? '#4CAF50' : '#F44336'} 
-                />
-                <View style={styles.statusText}>
-                  <Text variant="labelMedium">
-                    Server: {serverStatus.success ? 'Connected' : 'Not Connected'}
-                  </Text>
-                  <Text variant="bodySmall" style={styles.statusMessage}>
-                    {serverStatus.message}
-                  </Text>
-                  {serverStatus.url && (
-                    <Text variant="bodySmall" style={styles.statusUrl}>
-                      {serverStatus.url}
-                    </Text>
-                  )}
-                </View>
-                <IconButton
-                  icon="refresh"
-                  size={20}
-                  onPress={checkConnection}
-                />
-              </Card.Content>
-            </Card>
-          )}
+
 
           <Text variant="headlineMedium" style={styles.title}>
             {isSignUp ? 'Create Account' : 'Welcome Back'}
@@ -271,13 +205,13 @@ export default function AuthScreen() {
           )}
 
           {/* Кнопка входа/регистрации */}
-          <Button 
-            mode="contained" 
+          <Button
+            mode="contained"
             onPress={handleAuth}
             loading={isLoading}
             disabled={
               isLoading ||
-              (isSignUp 
+              (isSignUp
                 ? !email || !password1 || !password2 || !firstName || !lastName || !phoneNumber
                 : !email || !password1)
             }
@@ -299,47 +233,7 @@ export default function AuthScreen() {
               : "Don't have an account? Sign Up"}
           </Button>
 
-          {/* Кнопка для отладки */}
-          <Button
-            mode="outlined"
-            onPress={async () => {
-              try {
-                const response = await api.get('/accounts/account/')
-                console.log('All users response:', response.data)
-                
-                let usersList = []
-                if (response.data && Array.isArray(response.data.results)) {
-                  usersList = response.data.results
-                } else if (response.data && Array.isArray(response.data)) {
-                  usersList = response.data
-                }
-                
-                Alert.alert(
-                  'Debug Info - All Users',
-                  `Total users: ${usersList.length}\n\n` +
-                  `First 3 users:\n` +
-                  usersList.slice(0, 3).map((user, index) => 
-                    `${index + 1}. ${user.email} (${user.first_name || 'No name'})\n`
-                  ).join('') +
-                  `\nCurrent email field: ${email}`,
-                  [{ text: 'OK' }]
-                )
-              } catch (error) {
-                console.error('Debug error:', error)
-                Alert.alert('Error', 'Failed to get users list')
-              }
-            }}
-            style={styles.debugButton}
-          >
-            Debug: Show All Users
-          </Button>
 
-          {/* Подсказка по IP */}
-          {Platform.OS !== 'android' && Platform.OS !== 'ios' && (
-            <Text style={styles.ipHint}>
-              💡 For physical devices: Update IP in api.ts
-            </Text>
-          )}
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -347,7 +241,7 @@ export default function AuthScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { 
+  container: {
     flex: 1,
     backgroundColor: '#f5f5f5'
   },
@@ -355,8 +249,8 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
   },
-  content: { 
-    padding: 20 
+  content: {
+    padding: 20
   },
   centerContainer: {
     flex: 1,
@@ -385,8 +279,8 @@ const styles = StyleSheet.create({
     marginTop: 2,
     fontFamily: 'monospace',
   },
-  title: { 
-    textAlign: 'center', 
+  title: {
+    textAlign: 'center',
     marginBottom: 24,
     fontWeight: 'bold'
   },

@@ -49,9 +49,8 @@ export default function Index() {
 				showsVerticalScrollIndicator={false}
 				contentContainerStyle={tw`pb-8 gap-6`}
 			>
-				{/* Приветственная карточка */}
 				<LinearGradient
-					colors={['#7C3AED', '#8B5CF6', '#A78BFA']}
+					colors={['#6200ee', '#502b84ff', '#381d8aff']}
 					start={{ x: 0, y: 0 }}
 					end={{ x: 1, y: 1 }}
 					style={[tw`rounded-3xl p-6 mb-2`, styles.cardShadow]}
@@ -80,15 +79,15 @@ export default function Index() {
 					</View>
 				</LinearGradient>
 
-				{/* Быстрый доступ */}
+
 				<View>
 					<Text style={tw`text-xl font-bold text-gray-800 mb-4`}>
 						Quick Access
 					</Text>
 					<View style={tw`flex-row justify-between gap-3`}>
 						<Link href="/Calories" style={tw`flex-1`}>
-							<View style={[tw`p-5 rounded-2xl items-center`, styles.cardShadow, { backgroundColor: '#FEF3C7' }]}>
-								<View style={tw`bg-[#F59E0B] p-3 rounded-xl mb-3`}>
+							<View style={[tw`p-5 rounded-2xl items-center`, styles.cardShadow, { backgroundColor: '#F0FDF4' }]}>
+								<View style={tw`bg-[#6200ee] p-3 rounded-xl mb-3`}>
 									<MaterialIcons name='food-bank' size={28} color='white' />
 								</View>
 								<Text style={tw`font-bold text-gray-800 text-center`}>Calories</Text>
@@ -97,8 +96,8 @@ export default function Index() {
 						</Link>
 						
 						<Link href="/Activity" style={tw`flex-1`}>
-							<View style={[tw`p-5 rounded-2xl items-center`, styles.cardShadow, { backgroundColor: '#DCFCE7' }]}>
-								<View style={tw`bg-[#10B981] p-3 rounded-xl mb-3`}>
+							<View style={[tw`p-5 rounded-2xl items-center`, styles.cardShadow, { backgroundColor: '#F0FDF4' }]}>
+								<View style={tw`bg-[#6200ee] p-3 rounded-xl mb-3`}>
 									<Feather name='activity' size={28} color='white' />
 								</View>
 								<Text style={tw`font-bold text-gray-800 text-center`}>Activity</Text>
@@ -107,8 +106,8 @@ export default function Index() {
 						</Link>
 						
 						<Link href="/Profile" style={tw`flex-1`}>
-							<View style={[tw`p-5 rounded-2xl items-center`, styles.cardShadow, { backgroundColor: '#E0E7FF' }]}>
-								<View style={tw`bg-[#6366F1] p-3 rounded-xl mb-3`}>
+							<View style={[tw`p-5 rounded-2xl items-center`, styles.cardShadow, { backgroundColor: '#F0FDF4' }]}>
+								<View style={tw`bg-[#6200ee] p-3 rounded-xl mb-3`}>
 									<FontAwesome6 name='user' size={28} color='white' />
 								</View>
 								<Text style={tw`font-bold text-gray-800 text-center`}>Profile</Text>
@@ -118,53 +117,18 @@ export default function Index() {
 					</View>
 				</View>
 
-				{/* Статистика */}
-				<View>
-					<View style={tw`flex-row justify-between items-center mb-4`}>
-						<Text style={tw`text-xl font-bold text-gray-800`}>
-							Today's Stats
-						</Text>
-						<Feather name='bar-chart-2' size={22} color='#6200ee' />
-					</View>
-					
-					<View style={tw`flex-row justify-between gap-3`}>
-						<View style={[tw`p-4 rounded-2xl flex-1`, styles.cardShadow, { backgroundColor: 'white' }]}>
-							<View style={tw`flex-row items-center mb-2`}>
-								<View style={tw`bg-purple-100 p-2 rounded-lg mr-3`}>
-									<Ionicons name='flame' size={20} color='#8B5CF6' />
-								</View>
-								<Text style={tw`text-gray-600 text-xs`}>Calories</Text>
-							</View>
-							<Text style={tw`text-2xl font-bold text-gray-800`}>1,250</Text>
-							<Text style={tw`text-green-600 text-xs mt-1`}>+12% today</Text>
-						</View>
-						
-						<View style={[tw`p-4 rounded-2xl flex-1`, styles.cardShadow, { backgroundColor: 'white' }]}>
-							<View style={tw`flex-row items-center mb-2`}>
-								<View style={tw`bg-blue-100 p-2 rounded-lg mr-3`}>
-									<Feather name='watch' size={20} color='#3B82F6' />
-								</View>
-								<Text style={tw`text-gray-600 text-xs`}>Active Time</Text>
-							</View>
-							<Text style={tw`text-2xl font-bold text-gray-800`}>45m</Text>
-							<Text style={tw`text-green-600 text-xs mt-1`}>+8% today</Text>
-						</View>
-					</View>
-				</View>
-
-				{/* Достижения */}
 				<View>
 					<View style={tw`flex-row justify-between items-center mb-4`}>
 						<Text style={tw`text-xl font-bold text-gray-800`}>
 							Recent Achievements
 						</Text>
-						<Feather name='award' size={22} color='#F59E0B' />
+						<Feather name='award' size={22} color='#6200ee' />
 					</View>
 					
 					<View style={[tw`p-5 rounded-2xl`, styles.cardShadow, { backgroundColor: 'white' }]}>
 						<View style={tw`flex-row items-center mb-4`}>
-							<View style={tw`bg-yellow-100 p-3 rounded-xl mr-4`}>
-								<FontAwesome5 name='fire' size={24} color='#F59E0B' />
+							<View style={tw`bg-[#F0FDF4] p-3 rounded-xl mr-4`}>
+								<FontAwesome5 name='fire' size={24} color='#6200ee' />
 							</View>
 							<View style={tw`flex-1`}>
 								<Text style={tw`font-bold text-gray-800 text-lg`}>
@@ -177,8 +141,8 @@ export default function Index() {
 						</View>
 						
 						<View style={tw`flex-row items-center`}>
-							<View style={tw`bg-green-100 p-3 rounded-xl mr-4`}>
-								<Feather name='target' size={24} color='#10B981' />
+							<View style={tw`bg-[#F0FDF4] p-3 rounded-xl mr-4`}>
+								<Feather name='target' size={24} color='#6200ee' />
 							</View>
 							<View style={tw`flex-1`}>
 								<Text style={tw`font-bold text-gray-800 text-lg`}>
@@ -192,17 +156,16 @@ export default function Index() {
 					</View>
 				</View>
 
-				{/* Прогресс */}
 				<View>
 					<View style={tw`flex-row justify-between items-center mb-4`}>
 						<Text style={tw`text-xl font-bold text-gray-800`}>
 							Weekly Progress
 						</Text>
-						<Feather name='trending-up' size={22} color='#10B981' />
+						<Feather name='trending-up' size={22} color='#6200ee' />
 					</View>
 					
 					<LinearGradient
-						colors={['#6366F1', '#8B5CF6']}
+						colors={['#6200ee', '#502b84ff']}
 						start={{ x: 0, y: 0 }}
 						end={{ x: 1, y: 0 }}
 						style={[tw`rounded-2xl p-5`, styles.cardShadow]}
@@ -233,36 +196,34 @@ export default function Index() {
 					</LinearGradient>
 				</View>
 
-				{/* Платформенная статистика */}
 				<View>
 					<Text style={tw`text-xl font-bold text-gray-800 mb-4`}>
 						Community Stats
 					</Text>
 					
 					<View style={tw`flex-row justify-between gap-3`}>
-						<View style={[tw`p-4 rounded-2xl items-center flex-1`, styles.cardShadow, { backgroundColor: '#F0F9FF' }]}>
-							<Feather name='users' size={28} color='#0EA5E9' />
+						<View style={[tw`p-4 rounded-2xl items-center flex-1`, styles.cardShadow, { backgroundColor: '#F0FDF4' }]}>
+							<Feather name='users' size={28} color='#6200ee' />
 							<Text style={tw`text-2xl font-bold text-gray-800 mt-2`}>12.5k</Text>
 							<Text style={tw`text-gray-600 text-xs text-center mt-1`}>Active Users</Text>
 						</View>
 						
 						<View style={[tw`p-4 rounded-2xl items-center flex-1`, styles.cardShadow, { backgroundColor: '#F0FDF4' }]}>
-							<Feather name='target' size={28} color='#10B981' />
+							<Feather name='target' size={28} color='#6200ee' />
 							<Text style={tw`text-2xl font-bold text-gray-800 mt-2`}>89%</Text>
 							<Text style={tw`text-gray-600 text-xs text-center mt-1`}>Goals Achieved</Text>
 						</View>
 						
-						<View style={[tw`p-4 rounded-2xl items-center flex-1`, styles.cardShadow, { backgroundColor: '#FEF7CD' }]}>
-							<SimpleLineIcons name='energy' size={28} color='#EAB308' />
+						<View style={[tw`p-4 rounded-2xl items-center flex-1`, styles.cardShadow, { backgroundColor: '#F0FDF4' }]}>
+							<SimpleLineIcons name='energy' size={28} color='#6200ee' />
 							<Text style={tw`text-2xl font-bold text-gray-800 mt-2`}>500+</Text>
 							<Text style={tw`text-gray-600 text-xs text-center mt-1`}>Daily Workouts</Text>
 						</View>
 					</View>
 				</View>
 
-				{/* CTA карточка */}
 				<LinearGradient
-					colors={['#10B981', '#34D399']}
+					colors={['#6200ee', '#502b84ff']}
 					start={{ x: 0, y: 0 }}
 					end={{ x: 1, y: 1 }}
 					style={[tw`rounded-3xl p-6 items-center`, styles.cardShadow]}
@@ -273,14 +234,14 @@ export default function Index() {
 					<Text style={tw`text-white text-2xl font-bold text-center mb-2`}>
 						Ready to Transform?
 					</Text>
-					<Text style={tw`text-green-100 text-center text-sm mb-6`}>
+					<Text style={tw`text-[#ffff] text-center text-sm mb-6`}>
 						Join thousands who achieved their fitness goals
 					</Text>
 					<Link href="/Calories" style={tw`w-full`}>
 						<Button
 							mode="contained"
 							style={tw`bg-white rounded-full`}
-							labelStyle={tw`text-[#10B981] font-bold`}
+							labelStyle={tw`text-[#6200ee] font-bold`}
 							contentStyle={tw`py-2`}
 						>
 							Start Your Journey
@@ -300,7 +261,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#f8fafc',
 	},
 	userName: {
-		color: '#1f2937',
+		color: '#6200ee',
 		fontSize: 24,
 		fontWeight: 'bold',
 	},
