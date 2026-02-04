@@ -1,4 +1,5 @@
 import axios, { AxiosError } from 'axios'
+// import { Platform } from 'react-native'
 
 interface ServerError {
 	detail?: string
@@ -25,12 +26,14 @@ export interface User {
 }
 
 	const prodURL = 'http://127.0.0.1:8000/api/v1'
+	// const prodURL = 'http://192.168.0.111:8000/api/v1'
 
 // const getBaseURL = () => {
-// 	const prodURL = 'http://127.0.0.1:8000/api/v1'
-// 	return prodURL
+// 	if (Platform.OS === 'android') {
+// 		return 'http://10.0.2.2:8000/api/v1' // Для Android
+// 	}
+// 	return 'http://127.0.0.1:8000/api/v1' // Для iOS и остального
 // }
-
 export const api = axios.create({
 	baseURL: prodURL,
 	withCredentials: true,

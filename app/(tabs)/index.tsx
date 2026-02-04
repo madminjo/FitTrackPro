@@ -228,7 +228,7 @@ export default function Index() {
 					end={{ x: 1, y: 1 }}
 					style={[tw`rounded-3xl p-6 items-center`, styles.cardShadow]}
 				>
-					<View style={tw`bg-white/20 p-4 rounded-2xl mb-4`}>
+					<View style={tw`bg-white/20 py-4 px-8 rounded-2xl mb-4`}>
 						<AntDesign name='rocket1' size={36} color='white' />
 					</View>
 					<Text style={tw`text-white text-2xl font-bold text-center mb-2`}>

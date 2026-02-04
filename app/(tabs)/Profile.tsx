@@ -92,17 +92,18 @@ export default function Profile() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
-      <View style={tw`flex flex-row justify-between items-center w-full mb-6`}>
+      <View style={tw`flex-row justify-between items-center mt-2 mb-4`}>
         <View>
-          <Text style={tw`text-gray-500 text-sm`}>Welcome back,</Text>
-          <Text style={styles.title}>Profile</Text>
+          <Text style={tw`text-gray-500 text-sm`}>Firdavs KotiBok</Text>
+          <Text style={styles.header}>Profile</Text>
         </View>
         <View style={tw`flex-row items-center gap-2`}>
           <Button
             mode="text"
             onPress={signOut}
+            
             icon={() => (
-              <FontAwesome5 name="sign-out-alt" size={14} color="#6200ee" />
+              <FontAwesome5 name="sign-out-alt" size={17} color="#6200ee" />
             )}
           >
             <Text style={tw`text-[#6200ee] text-xs`}>Sign Out</Text>
@@ -286,9 +287,14 @@ function Divider() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 8,
-    paddingHorizontal: 8,
-    backgroundColor: '#f5f5f5',
+    paddingTop: 10,
+    paddingHorizontal: 16,
+    backgroundColor: '#f8fafc',
+  },
+  header: {
+    color: '#6200ee',
+    fontSize: 24,
+    fontWeight: 'bold',
   },
   centerContainer: {
     flex: 1,
@@ -302,10 +308,5 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderWidth: 3,
     borderColor: '#6200ee',
-  },
-  title: {
-		color: '#6200ee',
-		fontSize: 24,
-		fontWeight: 'bold',
-  },
+  }
 })

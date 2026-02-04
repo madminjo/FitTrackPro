@@ -164,7 +164,7 @@ export default function Calories() {
 					<TouchableOpacity 
 						onPress={pickImage}
 						style={[
-							tw`border-2 border-dashed border-purple-300 rounded-2xl items-center justify-center p-8 mb-4`,
+							tw`border  border-purple-300 rounded-2xl items-center justify-center p-12 mb-6`,
 							image ? tw`border-solid border-purple-500` : {}
 						]}
 					>
@@ -188,30 +188,22 @@ export default function Calories() {
 						)}
 					</TouchableOpacity>
 					<View style={tw`flex-row items-center gap-3`}>
-						<View style={tw`flex-1 bg-gray-50 rounded-xl p-3 flex-row items-center`}>
-							<Feather name="search" size={20} color="#6200ee" />
-							<Text style={tw`ml-2 text-gray-800`}>
-									Put a photo and press enter
-							</Text>
-						</View>
 						<TouchableOpacity
 							onPress={analyzeFood}
 							disabled={loading}
 							style={[
-								tw`bg-[#7C3AED] rounded-xl p-4`,
+								tw`bg-[#7C3AED] rounded-xl p-5 w-full items-center`,
 								loading && tw`opacity-70`
 							]}
 						>
 							{loading ? (
 								<ActivityIndicator color="white" size="small" />
 							) : (
-								<Feather name="zap" size={20} color="white" />
+								<Feather name="zap" size={25} color="white" />
 							)}
 						</TouchableOpacity>
 					</View>
 				</View>
-
-				{/* Результаты анализа */}
 				{analysis && (
 					<View style={[tw`rounded-2xl p-5 mb-6`, styles.cardShadow, { backgroundColor: 'white' }]}>
 						<View style={tw`flex-row justify-between items-center mb-4`}>
