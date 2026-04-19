@@ -45,15 +45,34 @@ export default function Calories() {
 	const [loading, setLoading] = useState(false)
 	const [analysis, setAnalysis] = useState<AIAnalysis | null>(null)
 	const [history, setHistory] = useState<HistoryItem[]>([
-		{ id: 1, name: 'Apple', calories: 95, protein: 0.5, carbs: 25, fat: 0.3, date: 'Today' },
-		{ id: 2, name: 'Chicken Breast', calories: 165, protein: 31, carbs: 0, fat: 3.6, date: 'Yesterday' },
+		{
+			id: 1,
+			name: 'Apple',
+			calories: 95,
+			protein: 0.5,
+			carbs: 25,
+			fat: 0.3,
+			date: 'Today',
+		},
+		{
+			id: 2,
+			name: 'Chicken Breast',
+			calories: 165,
+			protein: 31,
+			carbs: 0,
+			fat: 3.6,
+			date: 'Yesterday',
+		},
 	])
 
 	const pickImage = async () => {
 		try {
 			const permission = await ImagePicker.requestMediaLibraryPermissionsAsync()
 			if (!permission.granted) {
-				Alert.alert('Permission Required', 'Please allow access to your photo library')
+				Alert.alert(
+					'Permission Required',
+					'Please allow access to your photo library',
+				)
 				return
 			}
 
@@ -83,7 +102,7 @@ export default function Calories() {
 		setLoading(true)
 		try {
 			await new Promise(resolve => setTimeout(resolve, 2000))
-			
+
 			const mockAnalysis: AIAnalysis = {
 				food_name: query || 'Mixed Salad',
 				calories: Math.floor(Math.random() * 400) + 100,
@@ -91,11 +110,11 @@ export default function Calories() {
 				carbs: Math.floor(Math.random() * 50) + 10,
 				fat: Math.floor(Math.random() * 20) + 2,
 				serving_size: '1 serving',
-				confidence: 85 + Math.random() * 15
+				confidence: 85 + Math.random() * 15,
 			}
-			
+
 			setAnalysis(mockAnalysis)
-			
+
 			const newItem: HistoryItem = {
 				id: Date.now(),
 				name: mockAnalysis.food_name,
@@ -103,13 +122,12 @@ export default function Calories() {
 				protein: mockAnalysis.protein,
 				carbs: mockAnalysis.carbs,
 				fat: mockAnalysis.fat,
-				date: 'Just now'
+				date: 'Just now',
 			}
-			
+
 			setHistory([newItem, ...history.slice(0, 9)])
-			
+
 			if (query) setQuery('')
-			
 		} catch (error) {
 			Alert.alert('Analysis Failed', 'Please try again')
 			console.error(error)
@@ -131,12 +149,18 @@ export default function Calories() {
 					<Text style={tw`text-gray-500 text-sm`}>Calorie Tracker</Text>
 					<Text style={styles.header}>AI Food Analysis</Text>
 				</View>
-				<TouchableOpacity onPress={clearAll} style={tw`bg-purple-100 p-2 rounded-lg`}>
-					<Feather name="refresh-cw" size={20} color="#6200ee" />
+				<TouchableOpacity
+					onPress={clearAll}
+					style={tw`bg-purple-100 p-2 rounded-lg`}
+				>
+					<Feather name='refresh-cw' size={20} color='#6200ee' />
 				</TouchableOpacity>
 			</View>
 
-			<ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={tw`pb-8`}>
+			<ScrollView
+				showsVerticalScrollIndicator={false}
+				contentContainerStyle={tw`pb-8`}
+			>
 				<LinearGradient
 					colors={['#6200ee', '#502b84ff']}
 					start={{ x: 0, y: 0 }}
@@ -152,31 +176,49 @@ export default function Calories() {
 								AI-Powered Analysis
 							</Text>
 							<Text style={tw`text-purple-100 text-sm`}>
-								Upload a photo or enter food name to analyze calories and nutrients
+								Upload a photo or enter food name to analyze calories and
+								nutrients
 							</Text>
 						</View>
 					</View>
 				</LinearGradient>
 
-				<View style={[tw`rounded-2xl p-5 mb-6`, styles.cardShadow, { backgroundColor: 'white' }]}>
-					<Text style={tw`text-lg font-bold text-gray-800 mb-4`}>Upload Food Photo</Text>
-					
-					<TouchableOpacity 
+				<View
+					style={[
+						tw`rounded-2xl p-5 mb-6`,
+						styles.cardShadow,
+						{ backgroundColor: 'white' },
+					]}
+				>
+					<Text style={tw`text-lg font-bold text-gray-800 mb-4`}>
+						Upload Food Photo
+					</Text>
+
+					<TouchableOpacity
 						onPress={pickImage}
 						style={[
 							tw`border  border-purple-300 rounded-2xl items-center justify-center p-12 mb-6`,
-							image ? tw`border-solid border-purple-500` : {}
+							image ? tw`border-solid border-purple-500` : {},
 						]}
 					>
 						{image ? (
 							<View style={tw`items-center`}>
-								<Image source={{ uri: image }} style={tw`w-40 h-40 rounded-xl mb-4`} />
-								<Text style={tw`text-purple-600 font-medium`}>Photo Selected ✓</Text>
+								<Image
+									source={{ uri: image }}
+									style={tw`w-40 h-40 rounded-xl mb-4`}
+								/>
+								<Text style={tw`text-purple-600 font-medium`}>
+									Photo Selected ✓
+								</Text>
 							</View>
 						) : (
 							<View style={tw`items-center`}>
 								<View style={tw`bg-purple-100 p-4 rounded-2xl mb-4`}>
-									<MaterialIcons name="photo-camera" size={36} color="#6200ee" />
+									<MaterialIcons
+										name='photo-camera'
+										size={36}
+										color='#6200ee'
+									/>
 								</View>
 								<Text style={tw`text-gray-600 text-center`}>
 									Tap to upload a photo of your food
@@ -193,19 +235,25 @@ export default function Calories() {
 							disabled={loading}
 							style={[
 								tw`bg-[#7C3AED] rounded-xl p-5 w-full items-center`,
-								loading && tw`opacity-70`
+								loading && tw`opacity-70`,
 							]}
 						>
 							{loading ? (
-								<ActivityIndicator color="white" size="small" />
+								<ActivityIndicator color='white' size='small' />
 							) : (
-								<Feather name="zap" size={25} color="white" />
+								<Feather name='zap' size={25} color='white' />
 							)}
 						</TouchableOpacity>
 					</View>
 				</View>
 				{analysis && (
-					<View style={[tw`rounded-2xl p-5 mb-6`, styles.cardShadow, { backgroundColor: 'white' }]}>
+					<View
+						style={[
+							tw`rounded-2xl p-5 mb-6`,
+							styles.cardShadow,
+							{ backgroundColor: 'white' },
+						]}
+					>
 						<View style={tw`flex-row justify-between items-center mb-4`}>
 							<Text style={tw`text-xl font-bold text-gray-800`}>
 								Analysis Results
@@ -229,8 +277,10 @@ export default function Calories() {
 						{/* Основные калории */}
 						<View style={tw`bg-purple-50 rounded-2xl p-4 mb-4`}>
 							<View style={tw`flex-row items-center justify-between mb-2`}>
-								<Text style={tw`text-lg font-bold text-gray-800`}>Calories</Text>
-								<AntDesign name="fire" size={24} color="#FF5722" />
+								<Text style={tw`text-lg font-bold text-gray-800`}>
+									Calories
+								</Text>
+								<AntDesign name='fire' size={24} color='#FF5722' />
 							</View>
 							<Text style={tw`text-4xl font-bold text-[#FF5722]`}>
 								{analysis.calories}
@@ -239,12 +289,23 @@ export default function Calories() {
 						</View>
 
 						{/* Макронутриенты */}
-						<Text style={tw`text-lg font-bold text-gray-800 mb-4`}>Macronutrients</Text>
+						<Text style={tw`text-lg font-bold text-gray-800 mb-4`}>
+							Macronutrients
+						</Text>
 						<View style={tw`flex-row justify-between gap-3`}>
-							<View style={[tw`p-4 rounded-2xl flex-1`, { backgroundColor: '#E8F5E9' }]}>
+							<View
+								style={[
+									tw`p-4 rounded-2xl flex-1`,
+									{ backgroundColor: '#E8F5E9' },
+								]}
+							>
 								<View style={tw`flex-row items-center mb-2`}>
 									<View style={tw`bg-green-200 p-2 rounded-lg mr-2`}>
-										<FontAwesome5 name="drumstick-bite" size={16} color="#2E7D32" />
+										<FontAwesome5
+											name='drumstick-bite'
+											size={16}
+											color='#2E7D32'
+										/>
 									</View>
 									<Text style={tw`text-gray-700 font-medium`}>Protein</Text>
 								</View>
@@ -253,10 +314,15 @@ export default function Calories() {
 								</Text>
 							</View>
 
-							<View style={[tw`p-4 rounded-2xl flex-1`, { backgroundColor: '#FFF3E0' }]}>
+							<View
+								style={[
+									tw`p-4 rounded-2xl flex-1`,
+									{ backgroundColor: '#FFF3E0' },
+								]}
+							>
 								<View style={tw`flex-row items-center mb-2`}>
 									<View style={tw`bg-yellow-200 p-2 rounded-lg mr-2`}>
-										<Ionicons name="nutrition" size={16} color="#F57C00" />
+										<Ionicons name='nutrition' size={16} color='#F57C00' />
 									</View>
 									<Text style={tw`text-gray-700 font-medium`}>Carbs</Text>
 								</View>
@@ -265,10 +331,15 @@ export default function Calories() {
 								</Text>
 							</View>
 
-							<View style={[tw`p-4 rounded-2xl flex-1`, { backgroundColor: '#F3E5F5' }]}>
+							<View
+								style={[
+									tw`p-4 rounded-2xl flex-1`,
+									{ backgroundColor: '#F3E5F5' },
+								]}
+							>
 								<View style={tw`flex-row items-center mb-2`}>
 									<View style={tw`bg-purple-200 p-2 rounded-lg mr-2`}>
-										<FontAwesome5 name="oil-can" size={16} color="#7B1FA2" />
+										<FontAwesome5 name='oil-can' size={16} color='#7B1FA2' />
 									</View>
 									<Text style={tw`text-gray-700 font-medium`}>Fat</Text>
 								</View>
@@ -280,15 +351,23 @@ export default function Calories() {
 					</View>
 				)}
 
-				<View style={[tw`rounded-2xl p-5`, styles.cardShadow, { backgroundColor: 'white' }]}>
+				<View
+					style={[
+						tw`rounded-2xl p-5`,
+						styles.cardShadow,
+						{ backgroundColor: 'white' },
+					]}
+				>
 					<View style={tw`flex-row justify-between items-center mb-4`}>
-						<Text style={tw`text-xl font-bold text-gray-800`}>Recent History</Text>
-						<Feather name="clock" size={20} color="#6200ee" />
+						<Text style={tw`text-xl font-bold text-gray-800`}>
+							Recent History
+						</Text>
+						<Feather name='clock' size={20} color='#6200ee' />
 					</View>
 
-					{history.map((item) => (
-						<TouchableOpacity 
-							key={item.id} 
+					{history.map(item => (
+						<TouchableOpacity
+							key={item.id}
 							style={tw`flex-row justify-between items-center py-4 border-b border-gray-100 last:border-b-0`}
 						>
 							<View>
@@ -296,7 +375,7 @@ export default function Calories() {
 								<View style={tw`flex-row items-center mt-1`}>
 									<Text style={tw`text-gray-500 text-xs`}>{item.date} • </Text>
 									<View style={tw`flex-row items-center`}>
-										<AntDesign name="fire" size={12} color="#FF5722" />
+										<AntDesign name='fire' size={12} color='#FF5722' />
 										<Text style={tw`text-gray-500 text-xs ml-1`}>
 											{item.calories} kcal
 										</Text>
@@ -305,7 +384,7 @@ export default function Calories() {
 							</View>
 
 							<View style={tw`flex-row items-center gap-3`}>
-								<Feather name="chevron-right" size={20} color="#6200ee" />
+								<Feather name='chevron-right' size={20} color='#6200ee' />
 							</View>
 						</TouchableOpacity>
 					))}

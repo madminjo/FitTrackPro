@@ -25,8 +25,10 @@ export interface User {
 	username?: string
 }
 
-	const prodURL = 'http://127.0.0.1:8000/api/v1'
-	// const prodURL = 'http://192.168.0.111:8000/api/v1'
+
+const prodURL = 'http://10.124.2.55:8000/api/v1'
+// const prodURL = 'http://127.0.0.1:8000/api/v1'
+// const prodURL = 'http://192.168.0.111:8000/api/v1'
 
 // const getBaseURL = () => {
 // 	if (Platform.OS === 'android') {

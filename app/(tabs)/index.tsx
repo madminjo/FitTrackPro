@@ -15,7 +15,7 @@ import { Link } from 'expo-router'
 
 export default function Index() {
 	const { user, signOut } = useAuth()
-	
+
 	// Форматируем имя пользователя
 	const getUserName = () => {
 		if (user?.first_name) {
@@ -43,7 +43,7 @@ export default function Index() {
 					<Text style={tw`text-[#6200ee] text-xs font-medium`}>Sign Out</Text>
 				</Button>
 			</View>
-			
+
 			<ScrollView
 				style={tw`w-full`}
 				showsVerticalScrollIndicator={false}
@@ -64,11 +64,11 @@ export default function Index() {
 								Your personal fitness journey starts here
 							</Text>
 							<Button
-								mode="contained"
+								mode='contained'
 								style={tw`bg-white rounded-full w-40`}
 								labelStyle={tw`text-[#7C3AED] font-bold`}
 							>
-								<Link href="/Calories" style={tw`text-[#7C3AED] font-bold`}>
+								<Link href='/Calories' style={tw`text-[#7C3AED] font-bold`}>
 									Get Started
 								</Link>
 							</Button>
@@ -79,39 +79,68 @@ export default function Index() {
 					</View>
 				</LinearGradient>
 
-
 				<View>
 					<Text style={tw`text-xl font-bold text-gray-800 mb-4`}>
 						Quick Access
 					</Text>
 					<View style={tw`flex-row justify-between gap-3`}>
-						<Link href="/Calories" style={tw`flex-1`}>
-							<View style={[tw`p-5 rounded-2xl items-center`, styles.cardShadow, { backgroundColor: '#F0FDF4' }]}>
+						<Link href='/Calories' style={tw`flex-1`}>
+							<View
+								style={[
+									tw`p-5 rounded-2xl items-center`,
+									styles.cardShadow,
+									{ backgroundColor: '#F0FDF4' },
+								]}
+							>
 								<View style={tw`bg-[#6200ee] p-3 rounded-xl mb-3`}>
 									<MaterialIcons name='food-bank' size={28} color='white' />
 								</View>
-								<Text style={tw`font-bold text-gray-800 text-center`}>Calories</Text>
-								<Text style={tw`text-gray-600 text-xs text-center mt-1`}>AI Tracking</Text>
+								<Text style={tw`font-bold text-gray-800 text-center`}>
+									Calories
+								</Text>
+								<Text style={tw`text-gray-600 text-xs text-center mt-1`}>
+									AI Tracking
+								</Text>
 							</View>
 						</Link>
-						
-						<Link href="/Activity" style={tw`flex-1`}>
-							<View style={[tw`p-5 rounded-2xl items-center`, styles.cardShadow, { backgroundColor: '#F0FDF4' }]}>
+
+						<Link href='/Activity' style={tw`flex-1`}>
+							<View
+								style={[
+									tw`p-5 rounded-2xl items-center`,
+									styles.cardShadow,
+									{ backgroundColor: '#F0FDF4' },
+								]}
+							>
 								<View style={tw`bg-[#6200ee] p-3 rounded-xl mb-3`}>
 									<Feather name='activity' size={28} color='white' />
 								</View>
-								<Text style={tw`font-bold text-gray-800 text-center`}>Activity</Text>
-								<Text style={tw`text-gray-600 text-xs text-center mt-1`}>Real-time</Text>
+								<Text style={tw`font-bold text-gray-800 text-center`}>
+									Activity
+								</Text>
+								<Text style={tw`text-gray-600 text-xs text-center mt-1`}>
+									Real-time
+								</Text>
 							</View>
 						</Link>
-						
-						<Link href="/Profile" style={tw`flex-1`}>
-							<View style={[tw`p-5 rounded-2xl items-center`, styles.cardShadow, { backgroundColor: '#F0FDF4' }]}>
+
+						<Link href='/Profile' style={tw`flex-1`}>
+							<View
+								style={[
+									tw`p-5 rounded-2xl items-center`,
+									styles.cardShadow,
+									{ backgroundColor: '#F0FDF4' },
+								]}
+							>
 								<View style={tw`bg-[#6200ee] p-3 rounded-xl mb-3`}>
 									<FontAwesome6 name='user' size={28} color='white' />
 								</View>
-								<Text style={tw`font-bold text-gray-800 text-center`}>Profile</Text>
-								<Text style={tw`text-gray-600 text-xs text-center mt-1`}>Manage</Text>
+								<Text style={tw`font-bold text-gray-800 text-center`}>
+									Profile
+								</Text>
+								<Text style={tw`text-gray-600 text-xs text-center mt-1`}>
+									Manage
+								</Text>
 							</View>
 						</Link>
 					</View>
@@ -124,8 +153,14 @@ export default function Index() {
 						</Text>
 						<Feather name='award' size={22} color='#6200ee' />
 					</View>
-					
-					<View style={[tw`p-5 rounded-2xl`, styles.cardShadow, { backgroundColor: 'white' }]}>
+
+					<View
+						style={[
+							tw`p-5 rounded-2xl`,
+							styles.cardShadow,
+							{ backgroundColor: 'white' },
+						]}
+					>
 						<View style={tw`flex-row items-center mb-4`}>
 							<View style={tw`bg-[#F0FDF4] p-3 rounded-xl mr-4`}>
 								<FontAwesome5 name='fire' size={24} color='#6200ee' />
@@ -139,7 +174,7 @@ export default function Index() {
 								</Text>
 							</View>
 						</View>
-						
+
 						<View style={tw`flex-row items-center`}>
 							<View style={tw`bg-[#F0FDF4] p-3 rounded-xl mr-4`}>
 								<Feather name='target' size={24} color='#6200ee' />
@@ -163,7 +198,7 @@ export default function Index() {
 						</Text>
 						<Feather name='trending-up' size={22} color='#6200ee' />
 					</View>
-					
+
 					<LinearGradient
 						colors={['#6200ee', '#502b84ff']}
 						start={{ x: 0, y: 0 }}
@@ -179,17 +214,19 @@ export default function Index() {
 								<SimpleLineIcons name='energy' size={28} color='white' />
 							</View>
 						</View>
-						
+
 						<View style={tw`mb-4`}>
 							<View style={tw`flex-row justify-between mb-1`}>
 								<Text style={tw`text-purple-200 text-sm`}>Progress</Text>
 								<Text style={tw`text-white text-sm font-bold`}>3/4 days</Text>
 							</View>
 							<View style={tw`bg-white/20 h-2 rounded-full overflow-hidden`}>
-								<View style={[tw`h-full bg-white rounded-full`, { width: '75%' }]} />
+								<View
+									style={[tw`h-full bg-white rounded-full`, { width: '75%' }]}
+								/>
 							</View>
 						</View>
-						
+
 						<Text style={tw`text-purple-200 text-center text-sm`}>
 							Keep going! You're close to your weekly goal
 						</Text>
@@ -200,24 +237,52 @@ export default function Index() {
 					<Text style={tw`text-xl font-bold text-gray-800 mb-4`}>
 						Community Stats
 					</Text>
-					
+
 					<View style={tw`flex-row justify-between gap-3`}>
-						<View style={[tw`p-4 rounded-2xl items-center flex-1`, styles.cardShadow, { backgroundColor: '#F0FDF4' }]}>
+						<View
+							style={[
+								tw`p-4 rounded-2xl items-center flex-1`,
+								styles.cardShadow,
+								{ backgroundColor: '#F0FDF4' },
+							]}
+						>
 							<Feather name='users' size={28} color='#6200ee' />
-							<Text style={tw`text-2xl font-bold text-gray-800 mt-2`}>12.5k</Text>
-							<Text style={tw`text-gray-600 text-xs text-center mt-1`}>Active Users</Text>
+							<Text style={tw`text-2xl font-bold text-gray-800 mt-2`}>
+								12.5k
+							</Text>
+							<Text style={tw`text-gray-600 text-xs text-center mt-1`}>
+								Active Users
+							</Text>
 						</View>
-						
-						<View style={[tw`p-4 rounded-2xl items-center flex-1`, styles.cardShadow, { backgroundColor: '#F0FDF4' }]}>
+
+						<View
+							style={[
+								tw`p-4 rounded-2xl items-center flex-1`,
+								styles.cardShadow,
+								{ backgroundColor: '#F0FDF4' },
+							]}
+						>
 							<Feather name='target' size={28} color='#6200ee' />
 							<Text style={tw`text-2xl font-bold text-gray-800 mt-2`}>89%</Text>
-							<Text style={tw`text-gray-600 text-xs text-center mt-1`}>Goals Achieved</Text>
+							<Text style={tw`text-gray-600 text-xs text-center mt-1`}>
+								Goals Achieved
+							</Text>
 						</View>
-						
-						<View style={[tw`p-4 rounded-2xl items-center flex-1`, styles.cardShadow, { backgroundColor: '#F0FDF4' }]}>
+
+						<View
+							style={[
+								tw`p-4 rounded-2xl items-center flex-1`,
+								styles.cardShadow,
+								{ backgroundColor: '#F0FDF4' },
+							]}
+						>
 							<SimpleLineIcons name='energy' size={28} color='#6200ee' />
-							<Text style={tw`text-2xl font-bold text-gray-800 mt-2`}>500+</Text>
-							<Text style={tw`text-gray-600 text-xs text-center mt-1`}>Daily Workouts</Text>
+							<Text style={tw`text-2xl font-bold text-gray-800 mt-2`}>
+								500+
+							</Text>
+							<Text style={tw`text-gray-600 text-xs text-center mt-1`}>
+								Daily Workouts
+							</Text>
 						</View>
 					</View>
 				</View>
@@ -237,9 +302,9 @@ export default function Index() {
 					<Text style={tw`text-[#ffff] text-center text-sm mb-6`}>
 						Join thousands who achieved their fitness goals
 					</Text>
-					<Link href="/Calories" style={tw`w-full`}>
+					<Link href='/Calories' style={tw`w-full`}>
 						<Button
-							mode="contained"
+							mode='contained'
 							style={tw`bg-white rounded-full`}
 							labelStyle={tw`text-[#6200ee] font-bold`}
 							contentStyle={tw`py-2`}
